@@ -1,1 +1,3 @@
 # last-release-git-tag
+---
+[![Dependency Status](https://david-dm.org/semantic-release/last-release-git-tag.svg)](https://david-dm.org/semantic-release/last-release-git-tag)[![devDependency Status](https://david-dm.org/semantic-release/last-release-git-tag/dev-status.svg)](https://david-dm.org/semantic-release/last-release-git-tag#info=devDependencies)[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
