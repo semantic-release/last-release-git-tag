@@ -1,21 +1,23 @@
 const { exec } = require('child_process')
+const semver = require('semver')
 
 module.exports = function (pluginConfig, config, cb) {
   exec('git tag', (err, stdout, stderr) => {
     if (err) return cb(err)
 
-    const versionRegex = /^v((?:[0-9]+\.){2}[0-9]+)$/
-
     const tags = stdout
                   .trim()
                   .split('\n')
                   .map(tag => tag.trim())
-                  .filter(tag => versionRegex.test(tag))
+                  .filter(semver.valid)
+                  // semantic-release always puts a v in front.
+                  .filter(tag => tag.charAt(0) === 'v')
 
     if (tags.length < 1) return cb(null, {})
 
     const tag = tags.pop()
-    const version = tag.match(versionRegex)[1]
+    // semver.valid is poorly named, It actually parses it
+    const version = semver.valid(tag)
 
     cb(null, {
       version: version,
