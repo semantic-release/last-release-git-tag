@@ -12,6 +12,11 @@ module.exports = function (pluginConfig, config, cb) {
                   .filter(semver.valid)
                   // semantic-release always puts a v in front.
                   .filter(tag => tag.charAt(0) === 'v')
+                  .sort((v1, v2) => {
+                    if (semver.lt(v1, v2)) return -1
+                    if (semver.gt(v1, v2)) return 1
+                    return 0
+                  })
 
     if (tags.length < 1) return cb(null, {})
 
