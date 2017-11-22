@@ -1,7 +1,7 @@
 import test from 'ava';
 import tempy from 'tempy';
-import {gitRepo, gitCommit, gitCheckout, gitTagVersion, gitShallowClone, gitLog} from './helpers/git-utils';
 import {unshallow, gitTags} from '../lib/git';
+import {gitRepo, gitCommit, gitCheckout, gitTagVersion, gitShallowClone, gitLog} from './helpers/git-utils';
 
 test.beforeEach(t => {
   // Save the current working diretory

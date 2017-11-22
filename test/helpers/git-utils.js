@@ -64,7 +64,7 @@ export async function gitTagVersion(tagName, sha) {
  * @return {Array<string>} The list of commit sha from the current git repository.
  */
 export async function gitLog() {
-  return (await execa('git', ['log', '--format=format:%H'])).stdout.split('\n').filter(sha => !!sha);
+  return (await execa('git', ['log', '--format=format:%H'])).stdout.split('\n').filter(sha => Boolean(sha));
 }
 
 /**

@@ -11,10 +11,9 @@ async function getLastRelease(pluginConfig, {logger}) {
     const tag = tags[tags.length - 1];
     logger.log('Found git tag version %s.', tag);
     return {gitHead: tag, version: semver.valid(semver.clean(tag))};
-  } else {
-    logger.log('No git tag version found.');
-    return {};
   }
+  logger.log('No git tag version found.');
+  return {};
 }
 
 module.exports = callbackify(getLastRelease);
