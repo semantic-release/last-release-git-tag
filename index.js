@@ -1,4 +1,3 @@
-const {callbackify} = require('util');
 const semver = require('semver');
 const {gitTags, unshallow} = require('./lib/git');
 
@@ -16,4 +15,4 @@ async function getLastRelease(pluginConfig, {logger}) {
   return {};
 }
 
-module.exports = callbackify(getLastRelease);
+module.exports = getLastRelease;

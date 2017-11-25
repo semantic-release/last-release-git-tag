@@ -1,4 +1,3 @@
-import {promisify} from 'util';
 import test from 'ava';
 import {stub} from 'sinon';
 import {gitRepo, gitCommit, gitTagVersion, gitShallowClone} from './helpers/git-utils';
@@ -30,7 +29,7 @@ test.serial('Get the highest valid tag', async t => {
   await gitCommit('Fourth');
   await gitTagVersion('v3.0');
 
-  t.deepEqual(await promisify(getLastRelease)({}, {logger: t.context.logger}), {gitHead: 'v2.0.0', version: '2.0.0'});
+  t.deepEqual(await getLastRelease({}, {logger: t.context.logger}), {gitHead: 'v2.0.0', version: '2.0.0'});
   t.true(t.context.log.calledWith('Found git tag version %s.', 'v2.0.0'));
 });
 
@@ -45,7 +44,7 @@ test.serial('Return empty object if no valid tag is found', async t => {
   await gitCommit('Third');
   await gitTagVersion('v3.0');
 
-  t.deepEqual(await promisify(getLastRelease)({}, {logger: t.context.logger}), {});
+  t.deepEqual(await getLastRelease({}, {logger: t.context.logger}), {});
   t.true(t.context.log.calledWith('No git tag version found.'));
 });
 
@@ -60,6 +59,6 @@ test.serial('Retrieve tags even if not included in the shallow clone', async t =
   // Create a shallow clone with only 1 commit (ommiting the commit with the tag v2.0.0)
   await gitShallowClone(repo);
 
-  t.deepEqual(await promisify(getLastRelease)({}, {logger: t.context.logger}), {gitHead: 'v2.0.0', version: '2.0.0'});
+  t.deepEqual(await getLastRelease({}, {logger: t.context.logger}), {gitHead: 'v2.0.0', version: '2.0.0'});
   t.true(t.context.log.calledWith('Found git tag version %s.', 'v2.0.0'));
 });
